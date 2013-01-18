@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>abilities-device-sniffer-samsungtv</title>
+		<script src="$MANAGER_WIDGET/Common/af/2.0.0/loader.js"></script>
+	</head>
+	<body onload="initTest()">
+        <form action="http://192.168.1.114/abilities/index.php" id="test-form" method="post" target="test-frame"><input type="text" id="test-device-id" name="device_id"></form>
+        <iframe name="test-frame" id="test-frame" src="" frameborder="0" width="100%" height="100%"></iframe>
+        <script>
+            function findKey(list, value)
+            {
+                for (var key in list)
+                {
+                    if (list[key] === value)
+                    {
+                        return key;
+                    }
+                }
+            }
+
+            function initTest()
+            {
+                var form = document.getElementById('test-form');
+                var input = document.getElementById('test-device-id');
+                var deviceId;
+
+                if (deviceapis)
+                {
+                    // ermagad
+                    deviceId = findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '; ' +
+                        deviceapis.platform + '; ' +
+                        deviceapis.tv.info.getDeviceID() + '; ' +
+                        deviceapis.tv.info.getModel() + '; ' +
+                        deviceapis.tv.info.getFirmware() + '; ' +
+                        deviceapis.tv.info.getCountry() + '; ' +
+                        deviceapis.tv.info.getLanguage() + '; ' +
+                        deviceapis.tv.info.getVersion() + '; ' +
+                        findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '; ' +
+                        findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode());
+                }
+                else
+                {
+                    return alert('Failed to get device!');
+                }
+
+                input.value = deviceId;
+
+                form.submit();
+            }
+        </script>
+	</body>
+</html>
