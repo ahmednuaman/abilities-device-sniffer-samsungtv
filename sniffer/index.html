@@ -25,6 +25,7 @@
 
         	function initTest()
         	{
+                var frame = document.getElementById('test-frame');
         	    var form = document.getElementById('test-form');
         	    var input = document.getElementById('test-device-id');
         	    var deviceId;
@@ -47,6 +48,8 @@
         	    {
         	        return alert('Failed to get device!');
         	    }
+
+                frame.height = window.innerHeight;
 
         	    input.value = deviceId;
 
