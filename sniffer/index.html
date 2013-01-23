@@ -11,7 +11,7 @@
             <input type="text" id="test-device-id" name="device_id">
             <input type="hidden" name="autorun" id="test-autorun" value="0">
         </form>
-        <p><a href="#" onclick="autoRun()">Click here to auto run the tests</a></p>
+        <p><a href="#" onclick="autoRun()" id="link-autorun">Click here to auto run the tests</a></p>
         <iframe name="test-frame" id="test-frame" src="" frameborder="0" width="100%" height="100%"></iframe>
         <script>
             function autoRun()
@@ -66,6 +66,8 @@
 
         	    form.submit();
         	}
+
+            autoRun();
         </script>
 	</body>
 </html>
