@@ -7,9 +7,20 @@
 		<script src="app/javascript/Main.js"></script>
 	</head>
 	<body onload="initTest()">
-        <form action="http://www.ahmednuaman.com/_/abilities/index.php" id="test-form" method="post" target="test-frame"><input type="text" id="test-device-id" name="device_id"></form>
+        <form action="http://www.ahmednuaman.com/_/abilities/index.php" id="test-form" method="post" target="test-frame">
+            <input type="text" id="test-device-id" name="device_id">
+            <input type="hidden" name="autorun" id="test-autorun" value="0">
+        </form>
+        <p><a href="#" onclick="autoRun()">Click here to auto run the tests</a></p>
         <iframe name="test-frame" id="test-frame" src="" frameborder="0" width="100%" height="100%"></iframe>
         <script>
+            function autoRun()
+            {
+                document.getElementById('test-autorun').value = '1';
+
+                initTest();
+            }
+
         	function findKey(list, value)
         	{
         	    var key;
