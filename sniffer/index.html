@@ -4,59 +4,67 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>abilities-device-sniffer-samsungtv</title>
 		<script src="$MANAGER_WIDGET/Common/af/2.0.0/loader.js"></script>
+        <script src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
 	</head>
-	<body>
-    <!-- <body onload="initTest()"> -->
-        <!--<form action="http://www.ahmednuaman.com/_/abilities/index.php" id="test-form" method="post">
+    <body onload="initTest()" onkeydown="loadJS()">
+        <!-- <object id="pluginNetwork" classid="clsid:SAMSUNG-INFOLINK-NETWORK"></object> -->
+        <!-- <object id="pluginObjectNNavi" classid="clsid:SAMSUNG-INFOLINK-NNAVI"></object> -->
+        <form action="http://www.ahmednuaman.com/_/abilities/index.php" id="test-form" method="post" target="test-frame">
             <input type="text" id="test-device-id" name="device_id">
             <input type="hidden" name="autorun" id="test-autorun" value="1">
         </form>
+        <iframe name="test-frame" id="test-frame" src="" frameborder="0" width="100%" height="100%"></iframe>
         <script>
-        	function findKey(list, value)
-        	{
-        	    var key;
+            var form = document.getElementById('test-form');
+            var input = document.getElementById('test-device-id');
+            var widgetAPI = new Common.API.Widget();
+            var deviceId;
 
-        	    for (key in list)
-        	    {
-        	        if (list[key] === value)
-        	        {
-        	            return key;
-        	        }
-        	    }
-        	}
+        	function findKey (list, value) {
+                var key;
 
-        	function initTest()
-        	{
-                var frame = document.getElementById('test-frame');
-        	    var form = document.getElementById('test-form');
-        	    var input = document.getElementById('test-device-id');
-        	    var deviceId;
+                for (key in list) {
+                    if (list[key] === value) {
+                        return key;
+                    }
+                }
+            }
 
-        	    if (deviceapis)
-        	    {
-        	        // ermagad
-        	        deviceId = findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '; ' +
-        	            deviceapis.platform + '; ' +
-        	            deviceapis.tv.info.getDeviceID() + '; ' +
-        	            deviceapis.tv.info.getModel() + '; ' +
-        	            deviceapis.tv.info.getFirmware() + '; ' +
-        	            deviceapis.tv.info.getCountry() + '; ' +
-        	            deviceapis.tv.info.getLanguage() + '; ' +
-        	            deviceapis.tv.info.getVersion() + '; ' +
-        	            findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '; ' +
-        	            findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode());
-        	    }
-        	    else
-        	    {
-        	        return alert('Failed to get device!');
-        	    }
+            function loadJS () {
+                var scr = document.createElement('script');
 
-                frame.height = window.innerHeight;
+                scr.type = 'text/javascript';
+                scr.async = true;
+                scr.src = 'http://10.65.46.113/abilities-device-sniffer-samsungtv/script.js?x=' + (new Date()).getTime();
 
-        	    input.value = deviceId;
+                alert('Loading script: ' + scr.src);
 
-        	    form.submit();
-        	}
-        </script>-->
+                (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(scr);
+            }
+
+            function initTest () {
+                widgetAPI.sendReadyEvent();
+
+                if (deviceapis) {
+                    // ermagad
+                    deviceId = findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '; ' +
+                        deviceapis.platform + '; ' +
+                        deviceapis.tv.info.getDeviceID() + '; ' +
+                        deviceapis.tv.info.getModel() + '; ' +
+                        deviceapis.tv.info.getFirmware() + '; ' +
+                        deviceapis.tv.info.getVersion() + '; ' +
+                        findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '; ' +
+                        findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode());
+                } else {
+                    return alert('Failed to get device!');
+                }
+
+                alert(deviceId);
+
+                input.value = deviceId;
+
+                form.submit();
+            }
+        </script>
 	</body>
 </html>
