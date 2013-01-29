@@ -5,6 +5,12 @@
 		<title>abilities-device-sniffer-samsungtv</title>
 		<script src="$MANAGER_WIDGET/Common/af/2.0.0/loader.js"></script>
         <script src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
+        <style>
+            html,
+            body {
+                background: #ffffff;
+            }
+        </style>
 	</head>
     <!-- <body onload="initTest()" onkeydown="loadJS()"> -->
     <body onload="initTest()">
@@ -60,8 +66,6 @@
                 } else {
                     return alert('Failed to get device!');
                 }
-
-                alert(deviceId);
 
                 deviceIdInput.value = deviceId;
                 userAgentInput.value = navigator.userAgent;
