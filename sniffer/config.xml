@@ -3,13 +3,13 @@
 	<cpname itemtype="string"></cpname>
 	<cplogo itemtype="string"></cplogo>
 	<cpauthjs itemtype="string"></cpauthjs>
-	<ThumbIcon itemtype="string">icon/sampleIcon_106_87.png</ThumbIcon>
-	<BigThumbIcon itemtype="string">icon/sampleIcon_115_95.png</BigThumbIcon>
-	<ListIcon itemtype="string">icon/sampleIcon_85_70.png</ListIcon>
-	<BigListIcon itemtype="string">icon/sampleIcon_95_78.png</BigListIcon>
+	<ThumbIcon itemtype="string">assets/img/icon_106_87.png</ThumbIcon>
+	<BigThumbIcon itemtype="string">assets/img/icon_115_95.png</BigThumbIcon>
+	<ListIcon itemtype="string">assets/img/icon_85_70.png</ListIcon>
+	<BigListIcon itemtype="string">assets/img/icon_95_78.png</BigListIcon>
 	<category itemtype="string"></category>
 	<autoUpdate itemtype="boolean">n</autoUpdate>
-	<ver itemtype="string">0.100</ver>
+	<ver itemtype="string">2</ver>
 	<mgrver itemtype="string"></mgrver>
 	<fullwidget itemtype="boolean">y</fullwidget>
 	<type itemtype="string">user</type>
@@ -22,7 +22,7 @@
 	<description itemtype="string"></description>
 	<width itemtype="string">1280</width>
 	<height itemtype="string">720</height>
-	<author itemtype="group"> 
+	<author itemtype="group">
 		<name itemtype="string"></name>
 		<email itemtype="string"></email>
 		<link itemtype="string"></link>
