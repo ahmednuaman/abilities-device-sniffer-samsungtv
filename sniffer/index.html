@@ -55,14 +55,16 @@
 
                 if (deviceapis) {
                     // ermagad
-                    deviceId = findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '; ' +
-                        deviceapis.platform + '; ' +
-                        deviceapis.tv.info.getDeviceID() + '; ' +
-                        deviceapis.tv.info.getModel() + '; ' +
-                        deviceapis.tv.info.getFirmware() + '; ' +
-                        deviceapis.tv.info.getVersion() + '; ' +
-                        findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '; ' +
-                        findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode());
+                    deviceId = '{' +
+                        '"type": "' + findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '", ' +
+                        '"platform": "' + deviceapis.platform + '", ' +
+                        '"device_id": "' + deviceapis.tv.info.getDeviceID() + '", ' +
+                        '"model": "' + deviceapis.tv.info.getModel() + '", ' +
+                        '"firmware": "' + deviceapis.tv.info.getFirmware() + '", ' +
+                        '"sdk_version": "' + deviceapis.tv.info.getVersion() + '", ' +
+                        '"mode_3d": "' + findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '", ' +
+                        '"mode_sound": "' + findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode()) + '"'
+                    + '}';
                 } else {
                     return alert('Failed to get device!');
                 }
