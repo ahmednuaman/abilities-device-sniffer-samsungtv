@@ -88,7 +88,7 @@
             throw Error('XMLHttpRequest failed with status code ' + req.status);
           }
 
-          window.location = 'http://192.168.1.115/abilities/?x=' + (new Date()).getTime();
+          window.location = 'http://ab.iliti.es/?x=' + (new Date()).getTime();
         };
 
         return req.send(postData);
@@ -114,7 +114,7 @@
 
         log('Got device data: ' + deviceId);
 
-        xhr('http://192.168.1.115/abilities/', 'device_id=' + encodeURIComponent(deviceId));
+        xhr('http://ab.iliti.es/', 'device_id=' + encodeURIComponent(deviceId));
       }
     </script>
   </body>
