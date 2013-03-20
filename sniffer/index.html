@@ -1,79 +1,25 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>abilities-device-sniffer-samsungtv</title>
-		<script src="$MANAGER_WIDGET/Common/af/2.0.0/loader.js"></script>
-        <script src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
-        <style>
-            html,
-            body {
-                background: #ffffff;
-            }
-        </style>
-	</head>
-    <!-- <body onload="initTest()" onkeydown="loadJS()"> -->
-    <body onload="initTest()">
-        <!-- <object id="pluginNetwork" classid="clsid:SAMSUNG-INFOLINK-NETWORK"></object> -->
-        <!-- <object id="pluginObjectNNavi" classid="clsid:SAMSUNG-INFOLINK-NNAVI"></object> -->
-        <form action="http://ab.iliti.es/index.php" id="test-form" method="post">
-            <input type="hidden" id="test-device-id" name="device_id">
-            <input type="hidden" id="test-user-agent" name="user_agent">
-            <!-- <input type="hidden" name="autorun" id="test-autorun" value="1"> -->
-        </form>
-        <script>
-            var form = document.getElementById('test-form');
-            var deviceIdInput = document.getElementById('test-device-id');
-            var userAgentInput = document.getElementById('test-user-agent');
-            var widgetAPI = new Common.API.Widget();
-            var deviceId;
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title></title>
+      <script src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
+      <style>
+        html,
+        body {
+          background: #ffffff;
+        }
+      </style>
+    </head>
+  <body onload="init()">
+    <script>
+      var widgetAPI = new Common.API.Widget();
 
-        	function findKey (list, value) {
-                var key;
+      function init () {
+        widgetAPI.sendReadyEvent();
 
-                for (key in list) {
-                    if (list[key] === value) {
-                        return key;
-                    }
-                }
-            }
-
-            // function loadJS () {
-            //     var scr = document.createElement('script');
-
-            //     scr.type = 'text/javascript';
-            //     scr.async = true;
-            //     scr.src = 'http://10.65.46.113/abilities-device-sniffer-samsungtv/script.js?x=' + (new Date()).getTime();
-
-            //     alert('Loading script: ' + scr.src);
-
-            //     (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(scr);
-            // }
-
-            function initTest () {
-                widgetAPI.sendReadyEvent();
-
-                if (deviceapis) {
-                    // ermagad
-                    deviceId = '{' +
-                        '"type": "' + findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) + '", ' +
-                        '"platform": "' + deviceapis.platform + '", ' +
-                        '"device_id": "' + deviceapis.tv.info.getDeviceID() + '", ' +
-                        '"model": "' + deviceapis.tv.info.getModel() + '", ' +
-                        '"firmware": "' + deviceapis.tv.info.getFirmware() + '", ' +
-                        '"sdk_version": "' + deviceapis.tv.info.getVersion() + '", ' +
-                        '"mode_3d": "' + findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '", ' +
-                        '"mode_sound": "' + findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode()) + '"'
-                    + '}';
-                } else {
-                    return alert('Failed to get device!');
-                }
-
-                deviceIdInput.value = deviceId;
-                userAgentInput.value = navigator.userAgent;
-
-                form.submit();
-            }
-        </script>
-	</body>
+        window.location = 'http://192.168.1.115/abilities-device-sniffer-samsungtv/?x=' + (new Date()).getTime();
+      }
+    </script>
+    </body>
 </html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>abilities-device-sniffer-samsungtv</title>
+    <script src="$MANAGER_WIDGET/Common/af/2.0.0/loader.js"></script>
+    <style>
+      input {
+        color: #000000;
+        font-size: 14pt;
+        width: 1000px;
+      }
+      pre {
+        color: #ffffff;
+        font-size: 18pt;
+      }
+    </style>
+  </head>
+  <body onload="initTest()">
+    <pre id="log"></pre>
+    <script>
+      var l = document.getElementById('log');
+      var deviceId;
+
+      function log (str) {
+        l.innerHTML = str + "\n" + l.innerHTML;
+
+        alert(l);
+      }
+
+      function findKey (list, value) {
+        var key;
+
+        for (key in list) {
+          if (list[key] === value) {
+            return key;
+          }
+        }
+      }
+
+      function xhr(url, postData) {
+        var req = (function() {
+          var XMLHttpFactories, e, factory, xhr, _i, _len;
+
+          XMLHttpFactories = [
+            function() {
+              return new XMLHttpRequest();
+            }, function() {
+              return new ActiveXObject('Msxml2.XMLHTTP');
+            }, function() {
+              return new ActiveXObject('Msxml3.XMLHTTP');
+            }, function() {
+              return new ActiveXObject('Microsoft.XMLHTTP');
+            }
+          ];
+
+          for (_i = 0, _len = XMLHttpFactories.length; _i < _len; _i++) {
+            factory = XMLHttpFactories[_i];
+            try {
+              xhr = factory();
+            } catch (_error) {
+              e = _error;
+              continue;
+            }
+          }
+          return xhr;
+        })();
+
+        if (!req) {
+          throw Error('No XMLHttpRequest was found');
+        }
+
+        var method = postData ? 'POST' : 'GET';
+
+        req.open(method, url, true);
+        if (postData) {
+          req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        }
+        req.onreadystatechange = function() {
+          var next, response;
+
+          log('req.readyState ' + req.readyState);
+
+          if (req.readyState !== 4) {
+            return;
+          }
+
+          if (req.status !== 200 && req.status !== 304) {
+            throw Error('XMLHttpRequest failed with status code ' + req.status);
+          }
+
+          window.location = 'http://192.168.1.115/abilities/?x=' + (new Date()).getTime();
+        };
+
+        return req.send(postData);
+      };
+
+      function initTest () {
+        if (deviceapis) {
+          // ermagad
+          deviceId = '{' +
+          '"type": "' + findKey(deviceapis.tv.info, deviceapis.tv.info.getProduct()) +
+          ' (' + deviceapis.tv.info.getProduct() + ')", ' +
+          '"platform": "' + deviceapis.platform + '", ' +
+          '"device_id": "' + deviceapis.tv.info.getDeviceID() + '", ' +
+          '"model": "' + deviceapis.tv.info.getModel() + '", ' +
+          '"firmware": "' + deviceapis.tv.info.getFirmware() + '", ' +
+          '"sdk_version": "' + deviceapis.tv.info.getVersion() + '", ' +
+          '"mode_3d": "' + findKey(deviceapis.displaycontrol, deviceapis.displaycontrol.get3DEffectMode()) + '", ' +
+          '"mode_sound": "' + findKey(deviceapis.audiocontrol, deviceapis.audiocontrol.getOutputMode()) + '"'
+          + '}';
+        } else {
+          return log('Failed to get device!');
+        }
+
+        log('Got device data: ' + deviceId);
+
+        xhr('http://192.168.1.115/abilities/', 'device_id=' + encodeURIComponent(deviceId));
+      }
+    </script>
+  </body>
+</html>
