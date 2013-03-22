@@ -1,1 +1,2 @@
-# Nothing to see here...
+# Abilities sniffer app for Samsung Smart TV
+This is an app to install on Samsung Smart TV devices (as well as Blu Rays). It uses the `deviceapis` to build up a picture of the device in question before submitting that data to [http://ab.iliti.es](http://ab.iliti.es) for testing.
